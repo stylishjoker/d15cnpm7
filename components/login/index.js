@@ -1,10 +1,9 @@
 import { View , Text} from "react-native";
+import Inputvalue from "./input";
 const Login = ()=>{
     return (
         <View>
-            <Text>
-                Hello World
-            </Text>
+            <Inputvalue/>
         </View>
     )
 }

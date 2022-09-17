@@ -20,13 +20,15 @@ const App = () => {
           <Title content = "Welcome to Style ITer"/>
           <BackButton
             title="Login"
+            backgroundColor = "red"
             callback={() => navigation.navigate("Login")}
-            color="red"
+            color="white"
           />
           <BackButton
             title="Regist"
+            backgroundColor = "#333"
             callback={() => navigation.navigate("Details")}
-            color = "#333"
+            color = "white"
           />
         </View>
       </ImageBackground>
@@ -49,7 +51,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" options={{headerShown: false}} component={HomeScreen} />
-        <Stack.Screen name="Login" component={PanelLogin} />
+        <Stack.Screen name="Login" options={{headerShown:""}} component={PanelLogin} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
