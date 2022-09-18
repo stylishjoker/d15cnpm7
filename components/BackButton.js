@@ -1,13 +1,18 @@
 import React from "react";
-import { View, StyleSheet,Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 const BackButton = (props) => {
   return (
     <View style={style.container}>
-      <Text 
-        style={[style.button,{backgroundColor:props.backgroundColor , color:props.color}]}
+      <Text
+        style={[
+          style.button,
+          { backgroundColor: props.backgroundColor, color: props.color },
+        ]}
         title={props.title}
         onPress={props.callback}
-      >{props.title}</Text>
+      >
+        {props.title}
+      </Text>
     </View>
   );
 };
@@ -22,14 +27,15 @@ const style = StyleSheet.create({
   },
   button: {
     borderRadius: 24,
-    overflow: 'hidden',
-    textAlign:"center",
-    height:40,
-    display:"flex",
-    lineHeight:40,
-    fontSize:14,
+    overflow: "hidden",
+    textAlign: "center",
+    height: 40,
+    display: "flex",
+    lineHeight: 40,
+    fontSize: 14,
     fontWeight: "bold",
-    textTransform:"uppercase",
+    textTransform: "uppercase",
+    cursor: "pointer",
   },
 });
 export default BackButton;
