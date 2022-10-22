@@ -5,11 +5,15 @@ import {
   StyleSheet,
   Text,
   Alert,
+  Pressable,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ForgotPassword from "../forgotPassword";
+import axios from "axios";
+import HomePanes from "../Home";
+const baseUrl = "https://catfact.ninja/fact";
 
 const Login = () => {
   const Stack = createNativeStackNavigator();
@@ -17,18 +21,16 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [datas, setDatas] = useState("");
   useEffect(() => {
+    axios({
+      method: "get",
+      url: baseUrl,
+      user: {},
+    }).then((response) => {
+      setDatas(response.data);
+    });
     // getData();
-    fetch("http://localhost:3000/account-mobie")
-      .then((res) => res.json())
-      .then((data) => setDatas(data));
   }, []);
 
-  const innerAccount = () => {
-    Array.from(datas).forEach((data) => {
-      setAccount(data.account);
-      setPassword(data.password);
-    });
-  };
   const getData = () => {
     try {
       AsyncStorage.getItem("UserData").then((value) => {
@@ -74,6 +76,9 @@ const Login = () => {
   function ForgotPanes() {
     return <ForgotPassword />;
   }
+  function displayHome() {
+    return <HomePanes />;
+  }
   const LoginScreen = ({ navigation }) => {
     return (
       <SafeAreaView>
@@ -102,15 +107,17 @@ const Login = () => {
             autoCorrect="true"
           />
         </View>
-        <View style={styles.container_button}>
+        <Pressable
+          onPress={() => navigation.navigate("HomePanes")}
+          style={styles.container_button}
+        >
           <Text
             style={[styles.button, { backgroundColor: "red", color: "white" }]}
             title="Đăng nhập"
-            onPress={handleClick}
           >
             Đăng nhập
           </Text>
-        </View>
+        </Pressable>
         <View style={styles.container_button}>
           <Text
             onPress={() => navigation.navigate("ForgotPassword")}
@@ -133,6 +140,11 @@ const Login = () => {
         name="ForgotPassword"
         options={{ headerShown: false }}
         component={ForgotPanes}
+      />
+      <Stack.Screen
+        name="HomePanes"
+        options={{ headerShown: false }}
+        component={displayHome}
       />
     </Stack.Navigator>
   );
